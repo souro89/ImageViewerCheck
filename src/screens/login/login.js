@@ -27,6 +27,12 @@ class Login extends Component {
     this.setState({ username: e.target.value });
   };
 
+  inputPasswordChangeHandler = e => {
+    this.setState({ password: e.target.value });
+  };
+
+  loginClickHandler = e => {};
+
   render() {
     return (
       <div>
