@@ -18,8 +18,17 @@ class Home extends Component {
     }
   }
 
+  logoutHandler = () => {
+    sessionStorage.clear();
+    this.props.history.push({
+      pathname: "/"
+    });
+  };
+
   render() {
-    return <Header showSearchBarAndProfileIcon="true" />;
+    return (
+      <Header showSearchBarAndProfileIcon="true" logout={this.logoutHandler} />
+    );
   }
 }
 

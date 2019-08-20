@@ -1,26 +1,42 @@
 import React, { Component } from "react";
 import "./header.css";
 import SearchIcon from "@material-ui/icons/Search";
-import { Input, FormControl, Menu, MenuItem } from "@material-ui/core";
+import {
+  Input,
+  FormControl,
+  Avatar,
+  Popover,
+  MenuItem
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 class Header extends Component {
   constructor() {
     super();
     this.state = {
-      showDropdown: false
+      anchorEl: null
     };
   }
 
-  profileIconClickHandler = e => {
-    // this.state.showDropdown === true
-    //   ? this.setState({ showDropdown: false })
-    //   : this.setState({ showDropdown: true });
+  handleClick = e => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+
+  handleOnClose = e => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleAccountClick = () => {};
+
+  handleLogoutClick = () => {
+    this.props.logout();
   };
 
   render() {
+    const { showSearchBarAndProfileIcon } = this.props;
     return (
       <div>
-        {this.props.showSearchBarAndProfileIcon === "true" ? (
+        {showSearchBarAndProfileIcon === "true" ? (
           <header className="app-header">
             <span className="app-logo">Image Viewer</span>
             <span
@@ -28,7 +44,50 @@ class Header extends Component {
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={this.profileIconClickHandler}
-            />
+            >
+              <IconButton
+                style={{
+                  width: "25px",
+                  height: "25px"
+                }}
+                onClick={this.handleClick}
+              >
+                <Avatar
+                  alt="Profile Pic"
+                  src="https://scontent.cdninstagram.com/vp/acd2fb2c65dfb2c148967ecc657ca3f5/5DD9302A/t51.2885-19/s150x150/60113385_2304743493132057_1881074158138294272_n.jpg?_nc_ht=scontent.cdninstagram.com"
+                  className=""
+                  style={{ border: "2px solid #000" }}
+                />
+              </IconButton>
+              <Popover
+                id="simple-menu"
+                anchorEl={this.state.anchorEl}
+                open={Boolean(this.state.anchorEl)}
+                onClose={this.handleOnClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left"
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left"
+                }}
+                style={{ marginTop: "10px" }}
+              >
+                <div style={{ padding: "5px" }}>
+                  <div>
+                    <MenuItem onClick={this.handleAccountClick}>
+                      My Account
+                    </MenuItem>
+                    <div
+                      style={{ backgroundColor: "#c0c0c0", height: "1px" }}
+                    />
+                  </div>
+                  <MenuItem onClick={this.handleLogoutClick}>Logout</MenuItem>
+                </div>
+              </Popover>
+            </span>
+
             <span className="search-bar">
               <SearchIcon className="icon-search" />
               <FormControl>
@@ -37,7 +96,7 @@ class Header extends Component {
                   id="searchBar"
                   className="searchBar-input"
                   placeholder="Search..."
-                  disableUnderline="true"
+                  disableUnderline={true}
                 />
               </FormControl>
             </span>
