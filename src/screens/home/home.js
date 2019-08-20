@@ -19,7 +19,7 @@ class Home extends Component {
   }
 
   render() {
-    return <Header />;
+    return <Header showSearchBarAndProfileIcon="true" />;
   }
 }
 

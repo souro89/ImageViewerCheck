@@ -48,7 +48,7 @@ class Login extends Component {
     let password = "password";
 
     if (
-      this.state.username === "username" ||
+      this.state.username === "username" &&
       this.state.password === "password"
     ) {
       sessionStorage.setItem(

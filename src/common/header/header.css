@@ -1,13 +1,51 @@
 .app-header {
   background-color: #263238;
   height: 36px;
-  padding: 8px 32px 8px 16px;
+  padding: 8px 16px 8px 16px;
+  vertical-align: middle;
 }
 
 .app-logo {
   font-size: 18px;
   color: #fff;
-  margin: 0px 0px;
+  width: 20%;
   vertical-align: middle;
-  padding: 4px;
+  padding-top: 5px;
+}
+
+.search-bar {
+  float: right;
+  border-radius: 4px;
+  width: 300px;
+  /* padding: 10px; */
+  /* margin: 5px; */
+  height: 35px;
+  background-color: #c0c0c0;
+}
+
+.profile-icon {
+  float: right;
+  border-radius: 50%;
+  width: 18px;
+  padding: 10px;
+  margin-left: 10px;
+  height: 15px;
+  background-color: #c0c0c0;
+  cursor: pointer;
+}
+
+.profile-button {
+  float: right;
+}
+
+.icon-search {
+  font-size: 50px;
+  vertical-align: middle;
+  padding: 5px;
+  margin: 0px;
+}
+
+.searchBar-input {
+  width: 250px;
+  padding-top: 2px;
 }
