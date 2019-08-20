@@ -48,13 +48,14 @@ class Header extends Component {
               <IconButton
                 style={{
                   width: "25px",
-                  height: "25px"
+                  height: "25px",
+                  padding: "5px"
                 }}
                 onClick={this.handleClick}
               >
                 <Avatar
                   alt="Profile Pic"
-                  src="https://scontent.cdninstagram.com/vp/acd2fb2c65dfb2c148967ecc657ca3f5/5DD9302A/t51.2885-19/s150x150/60113385_2304743493132057_1881074158138294272_n.jpg?_nc_ht=scontent.cdninstagram.com"
+                  src={this.props.profilePicture}
                   className=""
                   style={{ border: "2px solid #000" }}
                 />
