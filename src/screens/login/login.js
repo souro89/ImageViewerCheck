@@ -31,7 +31,22 @@ class Login extends Component {
     this.setState({ password: e.target.value });
   };
 
-  loginClickHandler = e => {};
+  loginClickHandler = e => {
+    this.state.username === ""
+      ? this.setState({ usernameRequired: "dispBlock" })
+      : this.setState({ usernameRequired: "dispNone" });
+    this.state.password === ""
+      ? this.setState({ passwordRequired: "dispBlock" })
+      : this.setState({ passwordRequired: "dispNone" });
+
+    if (this.state.username === "" || this.state.password === "") {
+      return;
+    }
+
+    this.props.history.push({
+      pathname: "/home/"
+    });
+  };
 
   render() {
     return (
@@ -44,8 +59,8 @@ class Login extends Component {
             </Typography>
             <br />
             <br />
-            <FormControl className="inputStyle">
-              <InputLabel htmlFor="username">Username :</InputLabel>
+            <FormControl className="inputStyle" required>
+              <InputLabel htmlFor="username">Username</InputLabel>
               <Input
                 id="username"
                 type="text"
@@ -58,11 +73,11 @@ class Login extends Component {
             </FormHelperText>
             <br />
             <br />
-            <FormControl className="inputStyle">
-              <InputLabel htmlFor="username">Password :</InputLabel>
+            <FormControl className="inputStyle" required>
+              <InputLabel htmlFor="username">Password</InputLabel>
               <Input
                 id="password"
-                type="text"
+                type="password"
                 username={this.state.password}
                 onChange={this.inputPasswordChangeHandler}
               />
