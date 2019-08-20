@@ -19,7 +19,8 @@ class Login extends Component {
       username: "",
       usernameRequired: "dispNone",
       password: "",
-      passwordRequired: "dispNone"
+      passwordRequired: "dispNone",
+      usernamePasswordWrong: "dispNone"
     };
   }
 
@@ -43,9 +44,19 @@ class Login extends Component {
       return;
     }
 
-    this.props.history.push({
-      pathname: "/home/"
-    });
+    let username = "username";
+    let password = "password";
+
+    if (
+      this.state.username === "username" ||
+      this.state.password === "password"
+    ) {
+      this.props.history.push({
+        pathname: "/home/"
+      });
+    } else {
+      this.setState({ usernamePasswordWrong: "dispBlock" });
+    }
   };
 
   render() {
@@ -85,8 +96,9 @@ class Login extends Component {
             <FormHelperText className={this.state.passwordRequired}>
               <span className="red">requried</span>
             </FormHelperText>
-            <br />
-            <br />
+            <FormHelperText className={this.state.usernamePasswordWrong}>
+              <span className="red">Username or Password is incorrect</span>
+            </FormHelperText>
             <br />
             <br />
             <Button
