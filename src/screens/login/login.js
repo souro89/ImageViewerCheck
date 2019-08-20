@@ -51,6 +51,11 @@ class Login extends Component {
       this.state.username === "username" ||
       this.state.password === "password"
     ) {
+      sessionStorage.setItem(
+        "access-token",
+        "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784"
+      );
+
       this.props.history.push({
         pathname: "/home/"
       });
