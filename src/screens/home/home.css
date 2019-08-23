@@ -9,5 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 90;
+  margin-left: 200;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }

@@ -98,6 +98,9 @@ class Header extends Component {
                   className="searchBar-input"
                   placeholder="Search..."
                   disableUnderline={true}
+                  onChange={e => {
+                    this.props.searchHandler(e.target.value);
+                  }}
                 />
               </FormControl>
             </span>
