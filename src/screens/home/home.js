@@ -69,6 +69,12 @@ class Home extends Component {
     });
   };
 
+  toProfilePage = () => {
+    this.props.history.push({
+      pathname: "/profile"
+    });
+  };
+
   getUserData = () => {
     let that = this;
     let xhr = new XMLHttpRequest();
@@ -129,9 +135,11 @@ class Home extends Component {
       <div>
         <Header
           showSearchBarAndProfileIcon="true"
+          disableSearchBar="false"
           logout={this.logoutHandler}
           profilePicture={this.state.profilePicture}
           searchHandler={this.searchHandler}
+          toProfilePage={this.toProfilePage}
         />
         <div className="grid">
           <GridList

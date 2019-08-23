@@ -26,7 +26,9 @@ class Header extends Component {
     this.setState({ anchorEl: null });
   };
 
-  handleAccountClick = () => {};
+  handleAccountClick = () => {
+    this.props.toProfilePage();
+  };
 
   handleLogoutClick = () => {
     this.props.logout();
@@ -88,22 +90,23 @@ class Header extends Component {
                 </div>
               </Popover>
             </span>
-
-            <span className="search-bar">
-              <SearchIcon className="icon-search" />
-              <FormControl>
-                <Input
-                  type="text"
-                  id="searchBar"
-                  className="searchBar-input"
-                  placeholder="Search..."
-                  disableUnderline={true}
-                  onChange={e => {
-                    this.props.searchHandler(e.target.value);
-                  }}
-                />
-              </FormControl>
-            </span>
+            {this.props.disableSearchBar === "true" ? null : (
+              <span className="search-bar">
+                <SearchIcon className="icon-search" />
+                <FormControl>
+                  <Input
+                    type="text"
+                    id="searchBar"
+                    className="searchBar-input"
+                    placeholder="Search..."
+                    disableUnderline={true}
+                    onChange={e => {
+                      this.props.searchHandler(e.target.value);
+                    }}
+                  />
+                </FormControl>
+              </span>
+            )}
           </header>
         ) : (
           <header className="app-header">
