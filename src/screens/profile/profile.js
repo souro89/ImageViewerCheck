@@ -39,8 +39,8 @@ const styles = {
 };
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loggedIn: sessionStorage.getItem("access-token") == null ? false : true,
       data: [],
@@ -131,6 +131,7 @@ class Profile extends Component {
   };
 
   handleOpenImageModal = event => {
+    console.log(event.target.id);
     var result = this.state.mediaData.find(item => {
       return item.id === event.target.id;
     });
@@ -348,6 +349,101 @@ class Profile extends Component {
               </GridListTile>
             ))}
           </GridList>
+        )}
+
+        {this.state.currentItem != null && (
+          <Modal
+            aria-labelledby="image-modal"
+            aria-describedby="image details"
+            open={this.state.imageModalOpen}
+            onClose={this.handleCloseImageModal}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                backgroundColor: "#fff",
+                width: "70%",
+                height: "70%"
+              }}
+            >
+              <div style={{ width: "50%", padding: 10 }}>
+                <img
+                  style={{ height: "100%", width: "100%" }}
+                  src={this.state.currentItem.images.standard_resolution.url}
+                  alt={this.state.currentItem.caption.text}
+                />
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "50%",
+                  padding: 10
+                }}
+              >
+                <div
+                  style={{
+                    borderBottom: "2px solid #f2f2f2",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center"
+                  }}
+                >
+                  <Avatar
+                    alt="User Image"
+                    src={this.state.profilePicture}
+                    style={{ width: "50px", height: "50px", margin: "10px" }}
+                  />
+                  <Typography component="p" style={{ fontWeight: "bold" }}>
+                    {this.state.username}
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    height: "100%",
+                    flexDirection: "column",
+                    justifyContent: "space-between"
+                  }}
+                >
+                  <div>
+                    <Typography component="p">
+                      {this.state.currentItem.caption.text}
+                    </Typography>
+                    <Typography style={{ color: "#4dabf5" }} component="p">
+                      {}
+                    </Typography>
+                    {this.state.comments.hasOwnProperty(
+                      this.state.currentItem.id
+                    ) &&
+                      this.state.comments[this.state.currentItem.id].map(
+                        (comment, index) => {
+                          return (
+                            <div key={index} className="row">
+                              <Typography
+                                component="p"
+                                style={{ fontWeight: "bold" }}
+                              >
+                                {sessionStorage.getItem("username")}:
+                              </Typography>
+                              <Typography component="p">{comment}</Typography>
+                            </div>
+                          );
+                        }
+                      )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal>
         )}
       </div>
     );
