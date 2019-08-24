@@ -12,9 +12,12 @@ import {
   FormHelperText,
   GridList,
   GridListTile,
-  CardMedia
+  CardMedia,
+  IconButton
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import FavoriteIconBorder from "@material-ui/icons/FavoriteBorder";
+import FavoriteIconFill from "@material-ui/icons/Favorite";
 
 const styles = {
   paper: {
@@ -225,6 +228,13 @@ class Profile extends Component {
   };
 
   render() {
+    let hashTags = [];
+    if (this.state.currentItem !== null) {
+      hashTags = this.state.currentItem.tags.map(hash => {
+        return "#" + hash;
+      });
+    }
+
     return (
       <div>
         <Header
@@ -419,7 +429,7 @@ class Profile extends Component {
                       {this.state.currentItem.caption.text}
                     </Typography>
                     <Typography style={{ color: "#4dabf5" }} component="p">
-                      {}
+                      {hashTags.join(" ")}
                     </Typography>
                     {this.state.comments.hasOwnProperty(
                       this.state.currentItem.id
@@ -432,13 +442,56 @@ class Profile extends Component {
                                 component="p"
                                 style={{ fontWeight: "bold" }}
                               >
-                                {sessionStorage.getItem("username")}:
+                                {this.state.username}:
                               </Typography>
                               <Typography component="p">{comment}</Typography>
                             </div>
                           );
                         }
                       )}
+                  </div>
+                  <div>
+                    <div className="row">
+                      <IconButton
+                        aria-label="Add to favorites"
+                        onClick={this.likeClickHandler.bind(
+                          this,
+                          this.state.currentItem.id
+                        )}
+                      >
+                        {this.state.likeSet.has(this.state.currentItem.id) && (
+                          <FavoriteIconFill style={{ color: "#F44336" }} />
+                        )}
+                        {!this.state.likeSet.has(this.state.currentItem.id) && (
+                          <FavoriteIconBorder />
+                        )}
+                      </IconButton>
+                      <Typography component="p">
+                        {this.state.currentItem.likes.count} Likes
+                      </Typography>
+                    </div>
+                    <div className="row">
+                      <FormControl style={{ flexGrow: 1 }}>
+                        <InputLabel htmlFor="comment">Add Comment</InputLabel>
+                        <Input
+                          id="comment"
+                          value={this.state.currentComment}
+                          onChange={this.commentChangeHandler}
+                        />
+                      </FormControl>
+                      <FormControl>
+                        <Button
+                          onClick={this.onAddCommentClicked.bind(
+                            this,
+                            this.state.currentItem.id
+                          )}
+                          variant="contained"
+                          color="primary"
+                        >
+                          ADD
+                        </Button>
+                      </FormControl>
+                    </div>
                   </div>
                 </div>
               </div>

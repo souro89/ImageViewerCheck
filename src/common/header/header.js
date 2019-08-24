@@ -79,12 +79,16 @@ class Header extends Component {
               >
                 <div style={{ padding: "5px" }}>
                   <div>
-                    <MenuItem onClick={this.handleAccountClick}>
-                      My Account
-                    </MenuItem>
-                    <div
-                      style={{ backgroundColor: "#c0c0c0", height: "1px" }}
-                    />
+                    {this.props.disableSearchBar === "true" ? null : (
+                      <MenuItem onClick={this.handleAccountClick}>
+                        My Account
+                      </MenuItem>
+                    )}
+                    {this.props.disableSearchBar === "true" ? null : (
+                      <div
+                        style={{ backgroundColor: "#c0c0c0", height: "1px" }}
+                      />
+                    )}
                   </div>
                   <MenuItem onClick={this.handleLogoutClick}>Logout</MenuItem>
                 </div>
